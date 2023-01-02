@@ -12,7 +12,7 @@ contract FreeCodeCampFollowAlong {
     int favoriteNumberNegative = -4;
     // Similiar to uint but allows negative values which retains the same size of range as uint, however since that range runs negative and positive, the maximum absolute values are smaller than uint with the same memory allocation
     address someAddress = 0x0000000000000000000000000000000000000000;
-    // Finally a type I dont have experience with, addresses; they are pretty self explanatory in that they hold a 20 byte value which is the size of an eth address
+    // holds a 20 byte value which is the size of an eth address
     bytes32 favoriteBytes = "Dog";
     // bytes can be set to a fixed value (E.G. bytes2, bytes3, bytes32) or set to be dynamically sized (bytes) typically you want to explicility declare size
 
@@ -27,4 +27,29 @@ contract FreeCodeCampFollowAlong {
         //prefix parameters with "_"
         favoriteNumber = _favoriteNumber;
     }
+
+    function retrieve() public view returns (uint256) {
+        return favoriteNumber;
+    }
+
+    function add() public pure returns (uint256) {
+        return (1 + 1);
+    }
+
+    People public person = People({favoriteNumber: 2, name: "Tom"});
+
+    People[] public people;
+    // [] denotes array, people is an array of struct People. [] = unspecified size, [3] array of 3 elements
+
+    struct People {
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        people.push(People(_favoriteNumber, _name));
+        nameToFavoriteNumber[_name] = _favoriteNumber;
+    }
+
+    mapping(string => uint256) public nameToFavoriteNumber;
 }
